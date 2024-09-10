@@ -10,8 +10,10 @@
 // sub7={{campaign.name}}&
 // fbclid=IwY2xjawEuB01leHRuA2FlbQEwAAEdI_hfS60HzfJzr9bm2N-ee2UnIxTRPc-ug7SBvlSademc5YX-j6ViOOwl_aem_eUUrj2mq_b0s6EYyypCOxQ
 
-// var backend_url = "http://127.0.0.1:5050"; // url to backend microservice
-// var backend_url = document.currentScript.dataset.backend_url; // url to backend microservice
+var backend_url = document.currentScript.dataset.backend_url; 
+if (!backend_url) {
+    var backend_url = "";
+}
 var mode = document.currentScript.dataset.mode;
 if (!mode) {
     var mode = 1;
@@ -21,9 +23,9 @@ function generateExternalId() {
     return String(Math.floor(Math.random() * 999999999999) + 100000000000)
 }
 
-function replaceLinksOnButtons(paramsToAppend) {
-    let buttons = document.querySelectorAll('a');
-    buttons.forEach(a => {
+function replaceLinksOnSite(paramsToAppend) {
+    let links = document.querySelectorAll('a');
+    links.forEach(a => {
         let currentHref = a.href;
         let urlObj = new URL(currentHref);
 
