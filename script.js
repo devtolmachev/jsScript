@@ -63,7 +63,7 @@ async function sendData(data) {
 
 async function main() {
     var params = getPathParameters(url)
-    replaceLinksOnButtons(params);
+    replaceLinksOnSite(params);
 
     let ua = getUA();
     let ip = await getIp();
