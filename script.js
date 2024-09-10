@@ -10,8 +10,12 @@
 // sub7={{campaign.name}}&
 // fbclid=IwY2xjawEuB01leHRuA2FlbQEwAAEdI_hfS60HzfJzr9bm2N-ee2UnIxTRPc-ug7SBvlSademc5YX-j6ViOOwl_aem_eUUrj2mq_b0s6EYyypCOxQ
 
-var backend_url = "http://127.0.0.1:5050"; // url to backend microservice
-const mode = 1;  // 1 - keytaro; 2 - telegram. если тг - то меняем ссылки на бота + external_id
+// var backend_url = "http://127.0.0.1:5050"; // url to backend microservice
+var backend_url = document.currentScript.dataset.backend_url; // url to backend microservice
+var mode = document.currentScript.dataset.mode;  // 1 - keytaro; 2 - telegram. если тг - то меняем ссылки на бота + external_id
+if (!mode) {
+    var mode = 1;
+}
 
 function generateExternalId() {
     return String(Math.floor(Math.random() * 999999999999) + 100000000000)
