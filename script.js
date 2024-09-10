@@ -11,7 +11,7 @@
 // fbclid=IwY2xjawEuB01leHRuA2FlbQEwAAEdI_hfS60HzfJzr9bm2N-ee2UnIxTRPc-ug7SBvlSademc5YX-j6ViOOwl_aem_eUUrj2mq_b0s6EYyypCOxQ
 
 // var backend_url = "http://127.0.0.1:5050"; // url to backend microservice
-var backend_url = document.currentScript.dataset.backend_url; // url to backend microservice
+// var backend_url = document.currentScript.dataset.backend_url; // url to backend microservice
 var mode = document.currentScript.dataset.mode;
 if (!mode) {
     var mode = 1;
@@ -72,6 +72,7 @@ async function main() {
     params.user_agent = ua;
 
     console.log(params);
+    return ;
     let response = await sendData(params);
     console.log(response);
 }
