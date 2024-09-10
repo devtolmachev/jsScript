@@ -12,7 +12,7 @@
 
 // var backend_url = "http://127.0.0.1:5050"; // url to backend microservice
 var backend_url = document.currentScript.dataset.backend_url; // url to backend microservice
-var mode = document.currentScript.dataset.mode;  // 1 - keytaro; 2 - telegram. если тг - то меняем ссылки на бота + external_id
+var mode = document.currentScript.dataset.mode;
 if (!mode) {
     var mode = 1;
 }
