@@ -74,7 +74,7 @@ async function main() {
     params.user_agent = ua;
 
     console.log(params);
-    return ;
+    // return ;
     let response = await sendData(params);
     console.log(response);
 }
