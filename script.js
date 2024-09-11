@@ -68,10 +68,12 @@ async function main() {
     let ua = getUA();
     let ip = await getIp();
     let externalId = generateExternalId();
+    let clientUrl = new URL(url);
     
     params.ip = ip;
     params.external_id = externalId;
     params.user_agent = ua;
+    params.domain = clientUrl.origin;
 
     console.log(params);
     // return ;
