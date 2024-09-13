@@ -10,7 +10,7 @@
 // sub7={{campaign.name}}&
 // fbclid=IwY2xjawEuB01leHRuA2FlbQEwAAEdI_hfS60HzfJzr9bm2N-ee2UnIxTRPc-ug7SBvlSademc5YX-j6ViOOwl_aem_eUUrj2mq_b0s6EYyypCOxQ
 
-var backend_url = document.currentScript.dataset.backend_url; 
+var backend_url = document.currentScript.dataset.backend_url;
 if (!backend_url) {
     var backend_url = "";
 }
@@ -53,32 +53,43 @@ function getPathParameters(url) {
 }
 
 async function sendData(data) {
-    let resp = await fetch(backend_url, {
-        method: "POST", 
-        body: JSON.stringify(data)
-    });
-    return await resp.json()
-    
+    try {
+        let resp = await fetch(backend_url, {
+            method: "POST",
+            body: JSON.stringify(data)
+        });
+        if (!resp.ok) {
+            throw new Error(`HTTP error status: ${resp.status}`);
+        }
+        return await resp.json();
+    } catch (error) {
+        console.error('Error sending data:', error);
+    }
+
 }
 
 async function main() {
-    var params = getPathParameters(url)
-    replaceLinksOnSite(params);
+    try {
+        var params = getPathParameters(url)
+        let externalId = generateExternalId();
+        params.external_id = externalId;
+        replaceLinksOnSite(params);
 
-    let ua = getUA();
-    let ip = await getIp();
-    let externalId = generateExternalId();
-    let clientUrl = new URL(url);
-    
-    params.ip = ip;
-    params.external_id = externalId;
-    params.user_agent = ua;
-    params.domain = clientUrl.origin;
+        let ua = getUA();
+        let ip = await getIp();
+        let clientUrl = new URL(url);
 
-    console.log(params);
-    // return ;
-    let response = await sendData(params);
-    console.log(response);
+        params.ip = ip;
+        params.user_agent = ua;
+        params.domain = clientUrl.origin;
+
+        console.log(params);
+        // return ;
+        let response = await sendData(params);
+        console.log(response);
+    } catch (error) {
+        console.error('Error in main func: ', error)
+    }
 }
 
 // var url = "https://domain.com?fbc=12345&fbp=903462134925317&subid=1234567&sub1=ad_name&sub2=2908&sub3=143354&sub4=12345&sub5=placement&sub6=12345&sub7=campaign_name&fbclid=IwY2xjawEuB01leHRuA2FlbQEwAAEdI_hfS60HzfJzr9bm2N-ee2UnIxTRPc-ug7SBvlSademc5YX-j6ViOOwl_aem_eUUrj2mq_b0s6EYyypCOxQ";
