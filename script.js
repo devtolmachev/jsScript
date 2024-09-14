@@ -21,7 +21,7 @@ if (!mode) {
 
 function generateExternalId() {
     let id = String(Math.floor(Math.random() * 999999999999) + 100000000000);
-    return id + `${Date.now()}`
+    return id + `_${Date.now()}`
 }
 
 function replaceLinksOnSite(paramsToAppend) {
