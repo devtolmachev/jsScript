@@ -20,7 +20,8 @@ if (!mode) {
 }
 
 function generateExternalId() {
-    return String(Math.floor(Math.random() * 999999999999) + 100000000000)
+    let id = String(Math.floor(Math.random() * 999999999999) + 100000000000);
+    return id + `${Date.now()}`
 }
 
 function replaceLinksOnSite(paramsToAppend) {
