@@ -16,7 +16,7 @@ if (!backend_url) {
 }
 var mode = document.currentScript.dataset.mode;
 if (!mode) {
-    var mode = 1;
+    var mode = "1";
 }
 
 function generateExternalId() {
@@ -28,7 +28,13 @@ function replaceLinksOnSite(paramsToAppend) {
     let links = document.querySelectorAll('a');
     links.forEach(a => {
         let currentHref = a.href;
-        let urlObj = new URL(currentHref);
+
+        if (mode.split("t.me").length - 1 > 0) {
+            var urlObj = new URL(mode);
+        }
+        else {
+            var urlObj = new URL(currentHref);
+        }
 
         Object.keys(paramsToAppend).forEach(key => {
             urlObj.searchParams.set(key, paramsToAppend[key]);
