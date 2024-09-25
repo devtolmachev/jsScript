@@ -73,6 +73,8 @@ async function main() {
     try {
         var params = getPathParameters(url)
         let externalId = generateExternalId();
+        let path_params = structuredClone(params);
+
         params.external_id = externalId;
         replaceLinksOnSite(params);
 
@@ -85,7 +87,7 @@ async function main() {
         params.domain = clientUrl.origin;
 
         console.log(params);
-        // return ;
+        params.offer_parameters = path_params;
         let response = await sendData(params);
         console.log(response);
     } catch (error) {
